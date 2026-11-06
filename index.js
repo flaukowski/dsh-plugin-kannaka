@@ -30,11 +30,18 @@ function byVersionDesc(a, b) {
   return 0
 }
 
+function resolveDep() {
+  try { return createRequire(import.meta.url).resolve('kannaka-mcp') } catch { return null }
+}
+
 /** Candidate locations for kannaka-mcp.mjs, in the order they are tried. */
-export function candidates(config = {}, env = process.env, home = homedir()) {
+export function candidates(config = {}, env = process.env, home = homedir(), dep = resolveDep()) {
   const out = []
   if (config.script) out.push(config.script)
   if (env.KANNAKA_MCP_SCRIPT) out.push(env.KANNAKA_MCP_SCRIPT)
+  // The npm dependency: the normal case, versioned with this package.
+  if (dep) out.push(dep)
+  // No dependency installed (e.g. a bare checkout): the Claude Code plugin's copy.
   const plugins = join(home, '.claude', 'plugins')
   out.push(join(plugins, 'marketplaces', 'kannaka', 'plugins', 'kannaka', MCP_REL))
   const cache = join(plugins, 'cache', 'kannaka', 'kannaka')
@@ -44,12 +51,12 @@ export function candidates(config = {}, env = process.env, home = homedir()) {
   return out
 }
 
-export function resolveScript(config, env, home) {
-  const tried = candidates(config, env, home)
+export function resolveScript(config, env, home, dep) {
+  const tried = candidates(config, env, home, dep)
   const hit = tried.find((p) => existsSync(p))
   if (!hit) {
     throw new Error(
-      'dsh-plugin-kannaka: kannaka-mcp.mjs not found. Install the Kannaka Claude Code plugin, ' +
+      'dsh-plugin-kannaka: kannaka-mcp.mjs not found. Reinstall this plugin (it depends on kannaka-mcp), ' +
         'or set `script` in this plugin\'s config or KANNAKA_MCP_SCRIPT. Tried:\n  ' + tried.join('\n  '),
     )
   }

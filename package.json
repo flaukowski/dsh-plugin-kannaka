@@ -33,5 +33,8 @@
     "type": "git",
     "url": "git+https://github.com/flaukowski/dsh-plugin-kannaka.git"
   },
-  "homepage": "https://github.com/flaukowski/dsh-plugin-kannaka#readme"
+  "homepage": "https://github.com/flaukowski/dsh-plugin-kannaka#readme",
+  "dependencies": {
+    "kannaka-mcp": "^1.4.10"
+  }
 }

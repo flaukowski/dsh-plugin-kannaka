@@ -15,22 +15,22 @@ function fakeHome(versions = [], marketplace = false) {
 
 test('marketplace checkout wins over the cache', () => {
   const home = fakeHome(['1.4.8'], true)
-  assert.match(resolveScript({}, {}, home), /marketplaces/)
+  assert.match(resolveScript({}, {}, home, null), /marketplaces/)
 })
 
 test('cache falls back to the newest version, numerically', () => {
   const home = fakeHome(['1.4.9', '1.4.10', '1.4.8'])
-  assert.match(resolveScript({}, {}, home), /1\.4\.10/)
+  assert.match(resolveScript({}, {}, home, null), /1\.4\.10/)
 })
 
-test('config.script and KANNAKA_MCP_SCRIPT come first', () => {
+test('config.script, then KANNAKA_MCP_SCRIPT, then the npm dependency, then Claude Code paths', () => {
   const home = fakeHome([], true)
-  const c = candidates({ script: '/a.mjs' }, { KANNAKA_MCP_SCRIPT: '/b.mjs' }, home)
-  assert.deepEqual(c.slice(0, 2), ['/a.mjs', '/b.mjs'])
+  const c = candidates({ script: '/a.mjs' }, { KANNAKA_MCP_SCRIPT: '/b.mjs' }, home, '/dep.mjs')
+  assert.deepEqual(c.slice(0, 3), ['/a.mjs', '/b.mjs', '/dep.mjs'])
 })
 
 test('nothing installed: a clear error listing what was tried', () => {
-  assert.throws(() => resolveScript({}, {}, fakeHome()), /kannaka-mcp\.mjs not found[\s\S]*Tried:/)
+  assert.throws(() => resolveScript({}, {}, fakeHome(), null), /kannaka-mcp\.mjs not found[\s\S]*Tried:/)
 })
 
 test('client row: one stdio server, the dsh node binary, long tool timeout', () => {
