@@ -4,11 +4,34 @@
   "description": "Kannaka memory, swarm and KAX compute tools for DeepSeek Harness, through the Kannaka MCP server",
   "type": "module",
   "main": "index.js",
-  "files": ["index.js", "cordis.patch.yml", "README.md"],
-  "keywords": ["dsh-plugin", "kannaka", "mcp", "memory"],
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "kannaka",
+    "mcp",
+    "memory"
+  ],
   "author": "flaukowski <nflach78@gmail.com>",
-  "license": "MIT",
-  "engines": { "dsh": ">=0.2.2-rc.1 <0.3.0" },
-  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
-  "scripts": { "test": "node --test test/*.test.mjs" }
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flaukowski/dsh-plugin-kannaka.git"
+  },
+  "homepage": "https://github.com/flaukowski/dsh-plugin-kannaka#readme"
 }

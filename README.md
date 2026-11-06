@@ -55,4 +55,6 @@ Verified on 2026-11-06 against dsh 0.2.2-rc.1 (web profile, Windows): dsh starte
 
 ## License
 
-MIT
+Copyright 2026 Nick Flach
+
+Licensed under the [Space Child License, Version 1.0](LICENSE): free for peaceful use, including commercial use. It includes a peace clause that carries over to derivative works. Offensive military use needs a separate paid license. See the LICENSE file for the full terms.

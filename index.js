@@ -1,3 +1,4 @@
+// Copyright 2026 Nick Flach. Licensed under the Space Child License, Version 1.0 (see LICENSE).
 // dsh-plugin-kannaka: connects DeepSeek Harness to the Kannaka MCP server.
 //
 // It mounts dsh's own @deepseek-ai/dsh-mcp-client for one stdio server for
